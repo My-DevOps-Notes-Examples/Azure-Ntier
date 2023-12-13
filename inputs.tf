@@ -14,3 +14,14 @@ variable "ntier_vpc_info" {
     subnets_names = ["app", "web", "db"]
   }
 }
+
+variable "names" {
+  type = object({
+    resource_group  = string
+    virtual_network = string
+  })
+  default = {
+    resource_group  = "ntier-rg"
+    virtual_network = "ntier-vnet"
+  }
+}
