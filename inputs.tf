@@ -29,3 +29,16 @@ variable "sql_database_info" {
     database_name = "sureshkola-emp"
   }
 }
+
+variable "app_server_info" {
+  type = object({
+    nic_name     = string
+    vm_name      = string
+    subnet_index = number
+  })
+  default = {
+    nic_name     = "appserver1-nic"
+    vm_name      = "appserver1"
+    subnet_index = 0
+  }
+}

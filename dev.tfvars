@@ -5,3 +5,8 @@ ntier_vpc_info = {
   cidr_range           = ["10.100.0.0/16"]
   subnets_names        = ["web", "app"]
 }
+app_server_info = {
+  nic_name     = "appserver1-nic"
+  vm_name      = "appserver1"
+  subnet_index = 1
+}
