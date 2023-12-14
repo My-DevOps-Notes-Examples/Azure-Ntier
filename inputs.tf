@@ -6,22 +6,26 @@ variable "location" {
 
 variable "ntier_vpc_info" {
   type = object({
-    cidr_range    = list(string)
-    subnets_names = list(string)
+    resource_group_name  = string
+    virtual_network_name = string
+    cidr_range           = list(string)
+    subnets_names        = list(string)
   })
   default = {
-    cidr_range    = ["192.168.0.0/16"]
-    subnets_names = ["app", "web", "db"]
+    resource_group_name  = "ntier-rg"
+    virtual_network_name = "ntier-vnet"
+    cidr_range           = ["192.168.0.0/16"]
+    subnets_names        = ["app", "web", "db"]
   }
 }
 
-variable "names" {
+variable "sql_database_info" {
   type = object({
-    resource_group  = string
-    virtual_network = string
+    server_name   = string
+    database_name = string
   })
   default = {
-    resource_group  = "ntier-rg"
-    virtual_network = "ntier-vnet"
+    server_name   = "sureshkola-sql-server"
+    database_name = "sureshkola-emp"
   }
 }

@@ -1,10 +1,10 @@
 resource "azurerm_resource_group" "ntier" {
-  name     = var.names.resource_group
+  name     = var.ntier_vpc_info.resource_group_name
   location = var.location
 }
 
 resource "azurerm_virtual_network" "ntier" {
-  name                = var.names.virtual_network
+  name                = var.ntier_vpc_info.virtual_network_name
   resource_group_name = azurerm_resource_group.ntier.name
   address_space       = var.ntier_vpc_info.cidr_range
   location            = var.location
