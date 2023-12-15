@@ -4,7 +4,7 @@ resource "azurerm_network_interface" "appserver_nic" {
   resource_group_name = azurerm_resource_group.ntier.name
   ip_configuration {
     name                          = "appserver1-ip"
-    subnet_id                     = azurerm_subnet.subnets[var.app_server_info.subnet_index].id
+    subnet_id                     = data.azurerm_subnet.app_subnet.id
     private_ip_address_allocation = "Dynamic"
   }
 
@@ -14,12 +14,12 @@ resource "azurerm_network_interface" "appserver_nic" {
 }
 
 resource "azurerm_linux_virtual_machine" "app_server" {
-  name                = var.app_server_info.vm_name
-  resource_group_name = azurerm_resource_group.ntier.name
-  location            = azurerm_resource_group.ntier.location
-  size                = "Standard_B1s"
-  admin_username      = "sureshkola"
-  admin_password      = "Suresh@3697"
+  name                            = var.app_server_info.vm_name
+  resource_group_name             = azurerm_resource_group.ntier.name
+  location                        = azurerm_resource_group.ntier.location
+  size                            = "Standard_B1s"
+  admin_username                  = "sureshkola"
+  admin_password                  = "Suresh@3697"
   disable_password_authentication = false
   os_disk {
     caching              = "ReadWrite"
