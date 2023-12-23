@@ -109,3 +109,8 @@ resource "azurerm_network_security_group" "appserver_nsg" {
     CreatedBy = "Terraform"
   }
 }
+
+resource "azurerm_network_interface_security_group_association" "appserver_nicsg" {
+  network_interface_id      = azurerm_network_interface.server_nic.id
+  network_security_group_id = azurerm_network_security_group.appserver_nsg.id
+}
