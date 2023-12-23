@@ -23,3 +23,12 @@ variable "network_info" {
     security_group_name = "appserver-nsg"
   }
 }
+
+variable "server_info" {
+  type = object({
+    appserver_name = string
+  })
+  default = {
+    appserver_name = "appserver"
+  }
+}
