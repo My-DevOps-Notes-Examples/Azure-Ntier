@@ -34,3 +34,35 @@ resource "azurerm_subnet" "subnets" {
     azurerm_virtual_network.server_vn
   ]
 }
+
+resource "azurerm_public_ip" "appserver_ip" {
+  name                = var.network_info.appserver_ip_name
+  resource_group_name = azurerm_resource_group.server_rg.name
+  location            = var.location
+  allocation_method   = "Static"
+
+  tags = {
+    CreatedBy = "Terraform"
+  }
+}
+
+resource "azurerm_network_interface" "server_nic" {
+  name                = var.network_info.nic_name
+  location            = var.location
+  resource_group_name = azurerm_resource_group.server_rg.name
+  ip_configuration {
+    name                          = "appserver-1"
+    subnet_id                     = azurerm_subnet.subnets[0].id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.appserver_ip.id
+  }
+
+  tags = {
+    CreatedBy = "Terraform"
+  }
+
+  depends_on = [
+    azurerm_subnet.subnets,
+    azurerm_public_ip.appserver_ip
+  ]
+}
